@@ -1,8 +1,5 @@
-package com.medtrack.ui.model
+package com.medtrack.utils
 
-import android.media.Image
-import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
 import com.medtrack.R
 
 sealed class GenreType(val image: Int) {

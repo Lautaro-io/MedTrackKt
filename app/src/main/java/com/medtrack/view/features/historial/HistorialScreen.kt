@@ -158,7 +158,7 @@ fun HistorialScreen() {
                             modifier = Modifier.size(120.dp)
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("No hay registros para ese paciente")
+                        Text("No hay registros aun")
                     }
                 }
             }

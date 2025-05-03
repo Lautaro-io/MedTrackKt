@@ -4,8 +4,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
-
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -63,20 +61,20 @@ fun MainScreen() {
                 selected = currentRoute == "register",
                 onClick = { navController.navigate(Register.route){launchSingleTop = true} },
                 icon = { Icon(Icons.Default.Person, contentDescription = "Person Icon") },
-                label = { Text("Registro") }
+                label = { Text("Paciente") }
             )
 
+            BottomNavigationItem(
+                selected = currentRoute == "registros",
+                onClick = { navController.navigate(RegisterScreen.route){launchSingleTop = true} },
+                icon = { Icon(Icons.Default.Info, contentDescription = "Historial Icon") },
+                label = { Text("Registros") }
+            )
             BottomNavigationItem(
                 selected = currentRoute == "historial",
                 onClick = { navController.navigate(Historial.route){launchSingleTop = true} },
                 icon = { Icon(Icons.Default.DateRange, contentDescription = "Historial Icon") },
                 label = { Text("Historial") }
-            )
-            BottomNavigationItem(
-                selected = currentRoute == "registros",
-                onClick = { navController.navigate(RegisterScreen.route){launchSingleTop = true} },
-                icon = { Icon(Icons.Default.Info, contentDescription = "Historial Icon") },
-                label = { Text("Registrar") }
             )
 
 
@@ -89,13 +87,13 @@ fun MainScreen() {
             composable (Register.route){
                 RegisterPatientScreen()
             }
+            composable (RegisterScreen.route){
+                RegisterScreen()
+            }
             composable (Historial.route){
                 HistorialScreen()
             }
 
-            composable (RegisterScreen.route){
-                RegisterScreen()
-            }
         }
     }
 

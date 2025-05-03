@@ -2,7 +2,6 @@ package com.medtrack.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.medtrack.ui.model.GenreType
 
 
 @Entity( tableName = "pacientes")
