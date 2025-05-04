@@ -6,7 +6,8 @@ MedTrack es una aplicación móvil desarrollada en **Jetpack Compose** con arqui
 
 ## 📸 Capturas de pantalla
 
-![Demo]![AppGif](https://github.com/user-attachments/assets/11836c18-50dc-4eba-9151-d08acead89dd)
+![Demo]![AppGifBetter](https://github.com/user-attachments/assets/732ca458-6f01-448e-9921-4e80188cc9a8)
+
 
 
 
