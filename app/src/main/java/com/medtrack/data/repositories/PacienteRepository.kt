@@ -13,5 +13,9 @@ class PacienteRepository @Inject constructor(private val pacienteDao: PacienteDa
 
     fun getAllPatients() = pacienteDao.getAllPatient()
 
+    suspend fun altaPaciente(pacienteID : Int ) = pacienteDao.altaPaciente(pacienteID , true)
+
+    suspend fun bajaPaciente(pacienteID : Int ) = pacienteDao.altaPaciente(pacienteID , false)
+
 
 }

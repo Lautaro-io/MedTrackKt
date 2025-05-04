@@ -41,6 +41,7 @@ import com.medtrack.ui.theme.OxfordBlue
 import com.medtrack.ui.theme.RichBlack
 import com.medtrack.ui.theme.Whitee
 import com.medtrack.ui.theme.myFont
+import com.medtrack.view.features.home.components.PacienteItem
 import com.medtrack.viewmodel.PacienteViewModel
 
 
@@ -106,19 +107,17 @@ fun HomeScreen() {
                 item {
                     Column(
                         modifier = Modifier.fillMaxSize(),
-
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
+                        verticalArrangement = Arrangement.Center,
                     ) {
                         Spacer(modifier = Modifier.height(8.dp))
-
-                        Icon(imageVector = Icons.Default.Person, contentDescription = "Empty")
+                        Image(painterResource(R.drawable.caja ), contentDescription = "Imagen", modifier = Modifier.size(120.dp))
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             "No hay pacientes registrados aun",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
-                            color = RichBlack
+                            color = RichBlack.copy(alpha = 0.8f)
                         )
 
                     }
@@ -132,55 +131,3 @@ fun HomeScreen() {
 
 }
 
-@Composable
-fun PacienteItem(paciente: PacienteEntity) {
-    val genrePaciciente = GenreType.genreToObj(paciente.genreType)
-    val genreId = genrePaciciente.image
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        elevation = CardDefaults.cardElevation(4.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            OxfordBlue, Whitee
-        )
-
-    ) {
-        Row(modifier = Modifier.padding(32.dp)) {
-            Image(
-                painter = painterResource(genreId),
-                contentDescription = "GenrePic",
-                modifier = Modifier.size(80.dp)
-            )
-            Spacer(modifier = Modifier.weight(2f))
-            Column {
-
-                Text(
-                    "Nombre : ${paciente.name}",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = White
-                )
-                Text(
-                    "Apellido : ${paciente.surname}",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = White
-                )
-                Text(
-                    "Edad : ${paciente.age}",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = White
-                )
-                Text(
-                    "Fecha de ingreso: ${paciente.dateEntry}",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold, color = White
-                )
-            }
-        }
-
-    }
-}

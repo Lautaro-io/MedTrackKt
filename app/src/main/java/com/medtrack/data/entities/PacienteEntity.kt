@@ -12,5 +12,5 @@ data class PacienteEntity(
     val age : Int, // Edad
     val dateEntry : String,
     val genreType: String,
-    val alta : Boolean = false// Fecha de ingreso
+    var alta : Boolean = false// Fecha de ingreso
 )

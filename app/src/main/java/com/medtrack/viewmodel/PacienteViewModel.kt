@@ -29,6 +29,18 @@ class PacienteViewModel @Inject constructor(private val repository: PacienteRepo
         }
     }
 
+    fun altaPaciente(pacienteID : Int){
+        viewModelScope.launch {
+            repository.altaPaciente(pacienteID)
+        }
+    }
+
+    fun bajaPaciente(pacienteID : Int){
+        viewModelScope.launch {
+            repository.bajaPaciente(pacienteID)
+        }
+    }
+
 
 
 

@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.Composable
@@ -129,6 +131,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                      .menuAnchor()
+                ,
+                leadingIcon = {Icon(Icons.Default.ArrowDropDown, contentDescription = "Icon")}
 
             )
 

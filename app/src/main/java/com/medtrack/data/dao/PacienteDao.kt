@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.medtrack.data.entities.PacienteEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -21,5 +22,11 @@ interface PacienteDao {
 
     @Query ("SELECT * FROM pacientes")
     fun getAllPatient() : Flow<List<PacienteEntity>>
+
+    @Query ("UPDATE pacientes SET alta = :newAlta WHERE id = :pacienteID ")
+    suspend fun altaPaciente(pacienteID : Int ,newAlta : Boolean)
+
+    @Query ("UPDATE pacientes SET alta = :newAlta WHERE id = :pacienteID ")
+    suspend fun bajaPaciente(pacienteID : Int ,newAlta : Boolean)
 
 }
