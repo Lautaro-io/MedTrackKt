@@ -19,10 +19,16 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,7 +56,13 @@ import com.medtrack.viewmodel.PacienteViewModel
 fun HomeScreen() {
 
     val pacientesViewmodel: PacienteViewModel = hiltViewModel()
-    val pacientes = pacientesViewmodel.allPatients.collectAsState(initial = emptyList())
+    var nameSearch by remember { mutableStateOf("") }
+    val pacientes by if (nameSearch.isEmpty()) {
+        pacientesViewmodel.allPatients.collectAsState(initial = emptyList())
+    } else {
+        pacientesViewmodel.searchPatients(nameSearch).collectAsState(initial = emptyList())
+    }
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -66,8 +78,8 @@ fun HomeScreen() {
             contentAlignment = Alignment.Center
 
 
-            ) {
-            Column (horizontalAlignment = Alignment.CenterHorizontally){
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
                     painter = painterResource(R.drawable.medtrack),
                     contentDescription = "Icon",
@@ -95,12 +107,21 @@ fun HomeScreen() {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp)
         )
-        Spacer(modifier = Modifier.height(4.dp))
+        OutlinedTextField(
+            value = nameSearch,
+            onValueChange = { nameSearch = it },
+            label = { Text("Buscar pacientes") },
+            leadingIcon = { Icon(Icons.Default.Search , contentDescription = "IconSearch")}
+            ,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp , vertical = 4.dp)
+        )
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-            if (pacientes.value.isNotEmpty()) {
-                itemsIndexed(pacientes.value) { index, item ->
+            if (pacientes.isNotEmpty()) {
+                itemsIndexed(pacientes.reversed()) { index, item ->
                     PacienteItem(item)
                 }
             } else {
@@ -111,7 +132,11 @@ fun HomeScreen() {
                         verticalArrangement = Arrangement.Center,
                     ) {
                         Spacer(modifier = Modifier.height(8.dp))
-                        Image(painterResource(R.drawable.caja ), contentDescription = "Imagen", modifier = Modifier.size(120.dp))
+                        Image(
+                            painterResource(R.drawable.caja),
+                            contentDescription = "Imagen",
+                            modifier = Modifier.size(120.dp)
+                        )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             "No hay pacientes registrados aun",

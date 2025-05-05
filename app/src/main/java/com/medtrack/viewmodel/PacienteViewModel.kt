@@ -41,6 +41,10 @@ class PacienteViewModel @Inject constructor(private val repository: PacienteRepo
         }
     }
 
+     fun searchPatients(pacienteName: String): Flow<List<PacienteEntity>> {
+        return repository.searchPatient(pacienteName)
+    }
+
 
 
 

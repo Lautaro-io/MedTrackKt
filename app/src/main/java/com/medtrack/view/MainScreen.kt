@@ -24,6 +24,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.medtrack.ui.theme.OxfordBlue
+import com.medtrack.ui.theme.Red
+import com.medtrack.ui.theme.RichBlack
+import com.medtrack.ui.theme.Whitee
 import com.medtrack.view.features.historial.HistorialScreen
 import com.medtrack.view.features.home.HomeScreen
 import com.medtrack.view.features.register.RegisterPatientScreen
@@ -61,7 +65,8 @@ fun MainScreen() {
                 selected = currentRoute == "register",
                 onClick = { navController.navigate(Register.route){launchSingleTop = true} },
                 icon = { Icon(Icons.Default.Person, contentDescription = "Person Icon") },
-                label = { Text("Paciente") }
+                label = { Text("Paciente")  },
+                selectedContentColor = OxfordBlue
             )
 
             BottomNavigationItem(

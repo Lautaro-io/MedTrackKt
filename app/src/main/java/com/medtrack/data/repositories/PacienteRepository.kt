@@ -17,5 +17,7 @@ class PacienteRepository @Inject constructor(private val pacienteDao: PacienteDa
 
     suspend fun bajaPaciente(pacienteID : Int ) = pacienteDao.altaPaciente(pacienteID , false)
 
+    fun searchPatient(pacienteName : String) = pacienteDao.searchPatients(pacienteName)
+
 
 }

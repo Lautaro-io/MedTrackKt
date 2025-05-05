@@ -46,6 +46,7 @@ import com.medtrack.data.entities.PacienteEntity
 import com.medtrack.data.entities.RegistroPacienteEntity
 import com.medtrack.ui.theme.OxfordBlue
 import com.medtrack.ui.theme.Whitee
+import com.medtrack.view.features.register.components.DropDownMenuPatients
 import com.medtrack.viewmodel.PacienteViewModel
 import com.medtrack.viewmodel.RegistroPacienteViewModel
 
@@ -96,46 +97,9 @@ fun HistorialScreen() {
 
 
 
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            modifier = Modifier.padding(24.dp)
-
-
-        ) {
-            OutlinedTextField(
-                value = selected?.name ?: "Seleccione un paciente",
-                onValueChange = {},
-                readOnly = true,
-                label = { Text("Selecciona un paciente") },
-
-                modifier = Modifier
-                    .fillMaxWidth()
-
-                    .menuAnchor(),
-                leadingIcon = {Icon(Icons.Default.ArrowDropDown , contentDescription = "icon")}
-            )
-
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-
-
-            ) {
-
-                options.value.forEach { paciente ->
-                    DropdownMenuItem(
-                        onClick = {
-                            pacienteSelectedId = paciente.id
-                            selected = paciente
-                            expanded = false
-                        },
-                        text = {
-                            Text(text = "${paciente.name} ${paciente.surname}")
-                        })
-
-                }
-            }
+        DropDownMenuPatients(options.value , selected ) {paciente ->
+            selected = paciente
+            pacienteSelectedId = paciente.id
 
         }
 

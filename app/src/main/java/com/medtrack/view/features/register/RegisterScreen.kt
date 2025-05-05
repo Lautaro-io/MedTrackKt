@@ -43,6 +43,7 @@ import com.medtrack.R
 import com.medtrack.data.entities.PacienteEntity
 import com.medtrack.data.entities.RegistroPacienteEntity
 import com.medtrack.ui.theme.OxfordBlue
+import com.medtrack.view.features.register.components.DropDownMenuPatients
 import com.medtrack.view.navigation.RegisterScreen
 import com.medtrack.viewmodel.PacienteViewModel
 import com.medtrack.viewmodel.RegistroPacienteViewModel
@@ -62,7 +63,6 @@ fun RegisterScreen() {
     //radio buttons
     var selectedType by remember { mutableStateOf("") }
     //dropdown menu
-    var expanded by remember { mutableStateOf(false) }
     var options = viewModelPacientes.allPatients.collectAsState(emptyList())
     var selected by remember { mutableStateOf<PacienteEntity?>(null) }
 
@@ -117,46 +117,9 @@ fun RegisterScreen() {
 
         //Creamos el dropdownmenu
 
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            modifier = Modifier.fillMaxWidth().padding(24.dp)
-        ) {
-            //Usamos un textfield para manejar los valores
-            OutlinedTextField(
-                value = selected?.name ?: "Seleccione un paciente",
-                onValueChange = {}, //selected?.name si no hay ninguno seleccionado se pone un valor x defecto
-                readOnly = true, //unicamente leible, no se modifica
-                label = { Text("Selecciona una opcion") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                     .menuAnchor()
-                ,
-                leadingIcon = {Icon(Icons.Default.ArrowDropDown, contentDescription = "Icon")}
+        DropDownMenuPatients(options.value, selected){ paciente ->
+            selected = paciente
 
-            )
-
-            ExposedDropdownMenu( //Este contiene las opciones desplegables
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-
-
-            ) {
-
-
-                options.value.forEach { paciente -> //por cada paciente , se crea un item del dropdown manejando el click y dandole el texto
-                    DropdownMenuItem(
-                        onClick = {
-                            selected = paciente
-                            expanded = false
-                        },
-                        text = {
-                            Text(text = "${paciente.name} ${paciente.surname}")
-                        })
-
-                }
-
-            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))

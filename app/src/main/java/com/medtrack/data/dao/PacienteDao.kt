@@ -29,4 +29,7 @@ interface PacienteDao {
     @Query ("UPDATE pacientes SET alta = :newAlta WHERE id = :pacienteID ")
     suspend fun bajaPaciente(pacienteID : Int ,newAlta : Boolean)
 
+    @Query("SELECT * FROM PACIENTES WHERE name LIKE '%' || :pacienteName || '%' ")
+    fun searchPatients(pacienteName : String): Flow<List<PacienteEntity>>
+
 }
