@@ -1,5 +1,7 @@
 package com.medtrack.view.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
@@ -16,6 +18,7 @@ import com.medtrack.ui.theme.OxfordBlue
 import com.medtrack.view.MainScreen
 import com.medtrack.view.Splashscreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavigationWrapperHome() {
 
